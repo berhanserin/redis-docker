@@ -1,9 +1,3 @@
-#!/bin/bash
-#
-## redis backup script
-## usage
-## redis-backup.sh port backup.dir
-
 port=${1:-6379}
 backup_dir=${2:-"/data/backup/redis"}
 
@@ -31,7 +25,7 @@ while [ $try -gt 0 ] ; do
     cp $rdb $dst
     if [ $? = 0 ] ; then
       echo "[$port] redis rdb $rdb copied to $dst."
-      
+
       cd $backup_dir
       find . \( -name "$port-dump*" \) -mtime +3 -exec rm -f {} \;
       exit 0
